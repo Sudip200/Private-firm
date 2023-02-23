@@ -1,1 +1,67 @@
 
+.App {
+  background-color: #f5f5f5;
+  font-family: Arial, sans-serif;
+  text-align: center;
+  padding: 50px;
+}
+
+h1 {
+  color: #333;
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+}
+
+h3 {
+  color: #555;
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.cheatsheet-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 50px;
+}
+
+.cheat-sheet {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  margin: 20px;
+  width: 300px;
+  margin-left: 20px;
+}
+
+.cheat-sheet h3 {
+  color: #333;
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+
+.cheat-sheet a {
+  background-color: #333;
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  display: block;
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+  padding: 10px;
+  text-align: center;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  width: 100%;
+}
+
+.cheat-sheet a:hover {
+  background-color: #555;
+}
+
+.cheat-sheet p {
+  color: #888;
+  font-size: 1rem;
+}
