@@ -8,6 +8,25 @@
 body{
   background-color: #f5f5f5;
 }
+#blink{
+  animation: blink 2s linear infinite;
+  color: red;
+}
+@keyframes blink{
+  0%{opacity:0};
+  50%{opacity: 0.5;}
+  100%{opacity: 1;}
+}
+#share{
+  padding: 20px;
+  background-color: blue;
+  border: none;
+  width: 300px;
+  border-radius: 5px;
+  height: 10px;
+  color: white;
+  font-size: 1.2rem;
+}
 
 h1 {
   color: #333;
@@ -26,6 +45,7 @@ h3 {
   flex-wrap: wrap;
   justify-content: center;
   margin-top: 50px;
+  align-items: center;
 }
 
 .cheat-sheet {

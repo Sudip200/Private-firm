@@ -29,18 +29,36 @@ const data=[{
   author:"Sudipto Das"
 }]
 function App() {
+  const shareData = {
+    title: '',
+    text: 'Check out this link:',
+    url: '',
+  };
+  const share = async () => {
+    try {
+      await navigator.share(shareData);
+     // console.log('Shared successfully');
+    } catch (error) {
+     // console.error('Error sharing:', error);
+    }
+  };
+  
   return (
     <div className="App">
       <h1>CheatSheet Baba</h1>
        <h3>CheatSheets and notes available currently</h3>
+       <p  id="blink" style={{animation:'blink 2s linear infinite'}}>After Clicking Download Link Please Request Access Permission .You may have to wait to get permission as its a manual process</p>
        <div className='cheatsheet-container'>
         {data.map((item)=>{
           return(<div className='cheat-sheet'>
            <h3>{item.name}</h3>
+           {shareData.text=item.name}
            <a href={item.link} >Download</a>
+           <button id='share' onClick={share}>Share</button>
           <h4>Price:{item.price}</h4>
            <p>{item.category}</p>
            <p>Created By {item.author}</p>
+      
            {item.verified==="yes"?<p style={{color:'green'}}>verified</p>:<p style={{color:'red'}}>Not verified</p>}
           </div>)
         })}
