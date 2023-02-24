@@ -46,7 +46,9 @@ function App() {
   return (
     <div className="App">
       <h1>NoteShare</h1>
-       <h3>CheatSheets and notes available currently</h3>
+       <h3>CheatSheets and notes available currently<br/>
+        Please Fill This Form <a href='https://docs.google.com/forms/d/e/1FAIpQLSeCsgCXWN4r_c4lrdlAv1suFWBeKw_krgNu5WaUFJ0l0Fvc7Q/viewform?usp=sf_link'>Link</a>
+       </h3>
        <p  id="blink" style={{animation:'blink 2s linear infinite'}}>After Clicking Download Link Please Request Access Permission .You may have to wait to get permission as its a manual process</p>
        <div className='cheatsheet-container'>
         {data.map((item)=>{
