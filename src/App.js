@@ -45,7 +45,7 @@ function App() {
   
   return (
     <div className="App">
-      <h1>CheatSheet Baba</h1>
+      <h1>NoteShare</h1>
        <h3>CheatSheets and notes available currently</h3>
        <p  id="blink" style={{animation:'blink 2s linear infinite'}}>After Clicking Download Link Please Request Access Permission .You may have to wait to get permission as its a manual process</p>
        <div className='cheatsheet-container'>
