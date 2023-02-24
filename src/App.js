@@ -4,6 +4,10 @@ const data=[{
   name:"Sorting & Searching Cheatsheet",
   category:"Computer Science",
   link:"https://drive.google.com/file/d/1vsYE6GK7Qg6yomc-TtECSoiIr4D48siE/view?usp=sharing"
+},{
+  name:"LinkedList Algorithms cheatsheet",
+  category:"Computer Science",
+  link:"https://drive.google.com/file/d/15PuktHXd4pAkaaENe07Rug4sPqjeXqJk/view?usp=sharing"
 }]
 function App() {
   return (
