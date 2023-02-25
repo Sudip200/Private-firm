@@ -69,6 +69,7 @@ function DashBoard({user,route,setroute}){
     <h1>Welcome {user.name} </h1>
     <div className='dashboard-container'>
       <h3>Upload Files</h3>
+      <button onClick={()=>{setroute('home')} }  style={{ backgroundColor: '#4285f4', color: '#fff', fontSize: '1.1rem', padding: '0.5rem 1rem', borderRadius: '5px', border: 'none', cursor: 'pointer' }}>Go to Home</button>
       <UploadForm userId={user._id} route={route} setroute={setroute}/>
       <h3>Your Uploaded Files</h3>
       <div className='dashboard-items' style={{display:'flex',flexWrap:'wrap'}}>
