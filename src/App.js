@@ -34,7 +34,7 @@ function App() {
   const [data,setData]=useState([])
   const [route,setRoute]=useState('home')
   const [islogin,setLogin]=useState(false)
-  const [isreg,setReg]=useState(false)
+  
   const [user,setUser]=useState('')
   const shareData = {
     title: '',
