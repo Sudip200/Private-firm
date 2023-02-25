@@ -2,40 +2,14 @@
 import './App.css';
 import { useState,useEffect } from 'react';
 import axios from 'axios';
-// const data=[{
-//   name:"Sorting & Searching Cheatsheet",
-//   category:"Computer Science",
-//   link:"https://drive.google.com/file/d/1vsYE6GK7Qg6yomc-TtECSoiIr4D48siE/view?usp=sharing",
-//   price:"Free",
-//   verified:"no",
-//   author:"Sudipto Das"
-// },{
-//   name:"LinkedList Algorithms cheatsheet",
-//   category:"Computer Science",
-//   link:"https://drive.google.com/file/d/15PuktHXd4pAkaaENe07Rug4sPqjeXqJk/view?usp=sharing",
-//   price:"Free",
-//   verified:"no",
-//   author:"Sudipto Das"
-// },
-// {name:"Stack & Queue Algorithms",
-//   category:"Computer Science",
-//   link:"https://drive.google.com/file/d/1KXly6pEwRDB6yb_r6uvia6rA2eEU5Dae/view?usp=sharing",
-//   price:"Free",
-//   verified:"no",
-//   author:"Sudipto Das"},
-//   {name:"Differntial Calculas",
-//   category:"Mathematics",
-//   link:"https://drive.google.com/file/d/1wphT86fpJgFlCoT12nbHYE1q98-fIJRh/view?usp=sharing",
-//   price:"Free",
-//   verified:"no",
-//   author:"Sudipto Das"
-// }]
+
 function App() {
   const [data,setData]=useState([])
   const [route,setRoute]=useState('home')
   const [islogin,setLogin]=useState(false)
   
   const [user,setUser]=useState('')
+  
   const shareData = {
     title: '',
     text: 'Check out this link:',
@@ -52,13 +26,12 @@ function App() {
   useEffect(() => {
     axios.get('https://sharenote-api.onrender.com/allFiles')
       .then((response) => {
-        console.log(response)
         setData(response.data);
       })
       .catch((error) => console.log(error));
+    
   }, []);
-  
-  console.log(data)
+
   return (
     <div className="App">
       <h1>NoteShare</h1>
@@ -68,7 +41,7 @@ function App() {
         <h3>CheatSheets and notes available currently<br/>
         Please Fill This Form <a href='https://docs.google.com/forms/d/e/1FAIpQLSeCsgCXWN4r_c4lrdlAv1suFWBeKw_krgNu5WaUFJ0l0Fvc7Q/viewform?usp=sf_link'>Link</a>
        </h3>
-       <button onClick={()=>{setRoute('dasboard')}}>Go to DashBoard</button>
+       <button onClick={()=>{setRoute('dasboard')}} style={{ backgroundColor: '#4285f4', color: '#fff', fontSize: '1.1rem', padding: '0.5rem 1rem', borderRadius: '5px', border: 'none', cursor: 'pointer' }} >Go to DashBoard</button>
        <p  id="blink" style={{animation:'blink 2s linear infinite'}}>After Clicking Download Link Please Request Access Permission .You may have to wait to get permission as its a manual process</p>
        <div className='cheatsheet-container'>
         {data.map((item)=>{
@@ -85,18 +58,20 @@ function App() {
           </div>)
         })}
        </div>
-       </div>):(<DashBoard user={user}/>):(<LoginForm login={islogin} setlogin={setLogin} user={user} setuser={setUser}/>)
+       </div>):(<DashBoard user={user} route={route} setroute={setRoute}/>):(<LoginForm login={islogin} setlogin={setLogin} user={user} setuser={setUser}/>)
 }
     </div>
     
   );
 }
-function DashBoard({user}){
+function DashBoard({user,route,setroute}){
   return(<div>
     <h1>Welcome {user.name} </h1>
     <div className='dashboard-container'>
+      <h3>Upload Files</h3>
+      <UploadForm userId={user._id} route={route} setroute={setroute}/>
       <h3>Your Uploaded Files</h3>
-      <div className='dashboard-items'>
+      <div className='dashboard-items' style={{display:'flex',flexWrap:'wrap'}}>
       {user.uploadedFiles.map((item)=>{
           return(<div className='cheat-sheet'>
            <h3>{item.name}</h3>
@@ -113,6 +88,7 @@ function DashBoard({user}){
     </div>
   </div>)
 }
+
 function LoginForm({login,setlogin,user,setuser}) {
   const [email, setEmail] = useState('');
   const [route,setRoute]=useState('login')
@@ -126,11 +102,12 @@ function LoginForm({login,setlogin,user,setuser}) {
       password,
     })
       .then((response) => {
-        console.log(response);
+       
         // Handle successful response here
         if(response.data.message==="User logged in successfully"){
           setlogin(true)
           setuser(response.data.user)
+          
         }
       })
       .catch((error) => {
@@ -163,7 +140,7 @@ function LoginForm({login,setlogin,user,setuser}) {
 
         <button type="submit">Submit</button>
       </form>
-      <button onClick={()=>{setRoute('reg')}}>Register Here</button>
+      <button onClick={()=>{setRoute('reg')} }  style={{ backgroundColor: '#4285f4', color: '#fff', fontSize: '1.1rem', padding: '0.5rem 1rem', borderRadius: '5px', border: 'none', cursor: 'pointer' }}          >Register Here</button>
       </div>):(<RegisterForm  setuser={setuser} user={user} route={route} setroute={setRoute} login={login} setlogin={setlogin}/>)
 }
     </div>
@@ -183,7 +160,7 @@ function RegisterForm({user,setuser,route,setroute,login,setlogin}) {
       password,
     })
       .then((response) => {
-        console.log(response);
+       // console.log(response);
         // Handle successful response here
         if(response.data.msg==="Inserted"){
           setlogin(true)
@@ -226,8 +203,79 @@ function RegisterForm({user,setuser,route,setroute,login,setlogin}) {
         <button type="submit">Submit</button>
 
       </form>
-      <button onClick={()=>{setroute('login')}}>LogIn Here</button>
+      <button onClick={()=>{setroute('login')}}    style={{ backgroundColor: '#4285f4', color: '#fff', fontSize: '1.1rem', padding: '0.5rem 1rem', borderRadius: '5px', border: 'none', cursor: 'pointer', margin:'20px' }}>LogIn Here</button>
     </div>
+  );
+}
+function UploadForm({ userId,route,setroute }) {
+  const [name, setName] = useState('');
+  const [category, setCategory] = useState('');
+  const [link, setLink] = useState('');
+  const [price, setPrice] = useState('');
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    axios.post(`https://sharenote-api.onrender.com/uploadFiles/${userId}`, {
+      name,
+      category,
+      link,
+      price,
+    })
+      .then((response) => {
+      //  console.log(response);
+        // Handle successful response here
+        if(response.data.message==='File uploaded successfully'){
+          alert("File Uploadeed Succesfully")
+          setroute('home')
+
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+        // Handle error response here
+      });
+  };
+
+  return (
+    <form onSubmit={handleSubmit} className="upload-form">
+      <label htmlFor="name">Name:</label>
+      <input
+        type="text"
+        id="name"
+        value={name}
+        onChange={(event) => setName(event.target.value)}
+        className="form-input"
+      />
+
+      <label htmlFor="category">Category:</label>
+      <input
+        type="text"
+        id="category"
+        value={category}
+        onChange={(event) => setCategory(event.target.value)}
+        className="form-input"
+      />
+
+      <label htmlFor="link">Link:</label>
+      <input
+        type="text"
+        id="link"
+        value={link}
+        onChange={(event) => setLink(event.target.value)}
+        className="form-input"
+      />
+
+      <label htmlFor="price">Price:</label>
+      <input
+        type="text"
+        id="price"
+        value={price}
+        onChange={(event) => setPrice(event.target.value)}
+        className="form-input"
+      />
+
+      <button type="submit" className="form-submit-button">Upload File</button>
+    </form>
   );
 }
 
